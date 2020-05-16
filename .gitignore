@@ -5,3 +5,7 @@ junit*.properties
 IgnoreLexer.java~
 .gradle
 .DS_Store
+
+
+datasets/
+vector_data/

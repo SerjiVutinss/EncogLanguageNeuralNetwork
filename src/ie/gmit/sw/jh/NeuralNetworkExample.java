@@ -1,4 +1,4 @@
-package ie.gmit.sw;
+package ie.gmit.sw.jh;
 
 import java.io.File;
 
@@ -12,7 +12,7 @@ import org.encog.neural.networks.layers.BasicLayer;
 import org.encog.neural.networks.training.propagation.back.Backpropagation;
 import org.encog.util.csv.CSVFormat;
 
-public class NeuralNetwork {
+public class NeuralNetworkExample {
 
 	/*
 	 * *************************************************************************************
@@ -40,7 +40,7 @@ public class NeuralNetwork {
 	 * You can normalize the data using the Utils class either before or after writing to 
 	 * or reading from the CSV file. 
 	 */
-	public NeuralNetwork() {
+	public NeuralNetworkExample() {
 		int inputs = 2; //Change this to the number of input neurons
 		int outputs = 2; //Change this to the number of output neurons
 		
