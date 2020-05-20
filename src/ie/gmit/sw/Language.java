@@ -236,13 +236,13 @@ public enum Language {
 	Yiddish ("Yiddish"),
 	Yoruba ("Yoruba"),
 	Zeeuws ("Zeeuws");
-	
+
 	private final CharSequence language;
 
     private Language(CharSequence language) {
         this.language = language;
     }
-	
+
     public CharSequence getLanguageName() {
         return this.language;
     }

@@ -1,19 +1,43 @@
 package ie.gmit.sw;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class NGramProcessor {
 
-    public static int[] getNGrams(String text, int lower, int upper) {
+    public int getMinNGram() {
+        return _minNGram;
+    }
+
+    public int getMaxNgram() {
+        return _maxNgram;
+    }
+
+    private final int _minNGram;
+    private final int _maxNgram;
+
+    public NGramProcessor(int minNGram, int maxNGram) {
+        _minNGram = minNGram;
+        _maxNgram = maxNGram;
+    }
+
+    public int[] getNGrams(String text) {
         List<Integer> allNGrams = new ArrayList<>();
         try {
-            for (int i = lower; i <= upper; i++) {
+            for (int i = _minNGram; i <= _maxNgram; i++) {
                 allNGrams.addAll(getNGrams(text, i));
+                allNGrams.addAll(getNGrams(text.toLowerCase(), i));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+        // Hash all words
+        String[] words = text.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
+        Arrays.stream(words).forEach(x -> allNGrams.add(x.hashCode()));
+
         return allNGrams.stream().mapToInt(i -> i).toArray();
     }
 

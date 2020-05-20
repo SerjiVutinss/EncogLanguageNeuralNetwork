@@ -47,8 +47,8 @@ public class NeuralNetworkExample {
 		//Configure the neural network topology. 
 		BasicNetwork network = new BasicNetwork();
 		network.addLayer(new BasicLayer(new ActivationSigmoid(), true, inputs)); //You need to figure out the activation function
-		//network.addLayer(....); //You need to figure out the number of hidden layers and their neurons
-		//network.addLayer(....);
+
+		//
 		network.addLayer(new BasicLayer(new ActivationSigmoid(), true, outputs));
 		network.getStructure().finalizeStructure();
 		network.reset();
@@ -64,7 +64,8 @@ public class NeuralNetworkExample {
 		//Train the neural network
 		int epoch = 1; //Use this to track the number of epochs
 		do { 
-			trainer.iteration(); 
+			trainer.iteration();
+
 			epoch++;
 		} while(trainer.getError() > 0.01);		
 	}

@@ -7,5 +7,5 @@ IgnoreLexer.java~
 .DS_Store
 
 
-datasets/
-vector_data/
+data/
+networks/

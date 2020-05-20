@@ -2,6 +2,9 @@ package ie.gmit.sw;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.persist.EncogDirectoryPersistence;
@@ -69,4 +72,45 @@ public class Utilities {
     public static BasicNetwork loadNeuralNetwork(String fileName) {
         return (BasicNetwork) EncogDirectoryPersistence.loadObject(new File(fileName));
     }
+
+    public static int deserialiseCategories(double[] data) {
+
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] == 1) return i;
+        }
+        return -1;
+    }
+
+
+
+//    private static int getMinimumIndex(double[] arr) {
+//        double minValue = Double.MAX_VALUE;
+//        int minIndex = Integer.MAX_VALUE;
+//        for (int i = 0; i < arr.length; i++) {
+//
+//            if (arr[i] < minValue) {
+//                minValue = arr[i];
+//                minIndex = i;
+//            }
+//        }
+//        return minIndex;
+//    }
+//
+//    private static int getMinIndex(double[] arr) {
+//        return IntStream.range(0, arr.length).boxed()
+//                .min(Comparator.comparingDouble(
+//                        Arrays.stream(arr)
+//                                .boxed()
+//                                .collect(Collectors.toList())::get))
+//                .get();  // or throw if empty list
+//    }
+//
+//    private static int getMaxIndex(double[] arr) {
+//        return IntStream.range(0, arr.length).boxed()
+//                .max(Comparator.comparingDouble(
+//                        Arrays.stream(arr)
+//                                .boxed()
+//                                .collect(Collectors.toList())::get))
+//                .get();  // or throw if empty list
+//    }
 }
