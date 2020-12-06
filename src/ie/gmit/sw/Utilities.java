@@ -6,8 +6,13 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.encog.ml.data.MLDataSet;
+import org.encog.ml.data.buffer.MemoryDataLoader;
+import org.encog.ml.data.buffer.codec.CSVDataCODEC;
+import org.encog.ml.data.buffer.codec.DataSetCODEC;
 import org.encog.neural.networks.BasicNetwork;
 import org.encog.persist.EncogDirectoryPersistence;
+import org.encog.util.csv.CSVFormat;
 
 public class Utilities {
 
@@ -55,7 +60,11 @@ public class Utilities {
      * @param fileName the name of the file to save the network to.
      */
     public static void saveNeuralNetwork(BasicNetwork network, String fileName) {
-        EncogDirectoryPersistence.saveObject(new File(fileName), network);
+        saveNeuralNetwork(network, new File(fileName));
+    }
+
+    public static void saveNeuralNetwork(BasicNetwork network, File file) {
+        EncogDirectoryPersistence.saveObject(file, network);
     }
 
 
@@ -70,7 +79,11 @@ public class Utilities {
      * @return
      */
     public static BasicNetwork loadNeuralNetwork(String fileName) {
-        return (BasicNetwork) EncogDirectoryPersistence.loadObject(new File(fileName));
+        return loadNeuralNetwork(new File(fileName));
+    }
+
+    public static BasicNetwork loadNeuralNetwork(File file) {
+        return (BasicNetwork) EncogDirectoryPersistence.loadObject(file);
     }
 
     public static int deserialiseCategories(double[] data) {
@@ -81,6 +94,13 @@ public class Utilities {
         return -1;
     }
 
+    public static MLDataSet loadDataSet(String filename, int numInputs, int numOutputs) {
+
+        DataSetCODEC dsc = new CSVDataCODEC(new File(filename), CSVFormat.ENGLISH, false, numInputs, numOutputs, false);
+        MemoryDataLoader mdl = new MemoryDataLoader(dsc);
+
+        return mdl.external2Memory();
+    }
 
 
 //    private static int getMinimumIndex(double[] arr) {

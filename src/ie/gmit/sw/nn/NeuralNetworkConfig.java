@@ -4,6 +4,8 @@ public class NeuralNetworkConfig {
 
     private int _vectorLength;
     private int _minNGramSize;
+    private int _maxNGramSize;
+
 
 
 

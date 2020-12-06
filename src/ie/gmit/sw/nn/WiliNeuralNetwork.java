@@ -99,10 +99,9 @@ public class WiliNeuralNetwork {
         // Build the topology
         int geometricPyramidRuleSize = (int) Math.sqrt(_numInputs * _numOutputs); // Geometric Pyramid Rule to calculate hidden layer nodes
 
+        // Add a dumb input layer - no activation or bias required
         System.out.println(buildLayerDescriptor("Input", _numInputs, "None", false, -1));
         _network.addLayer(new BasicLayer(null, false, _numInputs));
-//        _network.addLayer(new BasicLayer(new ActivationTANH(), true, _numOutputs, 0.8));
-
 
         int l1_count = (int) (geometricPyramidRuleSize * 0.2);
 
@@ -110,6 +109,7 @@ public class WiliNeuralNetwork {
         _network.addLayer(new BasicLayer(new ActivationElliottSymmetric(), true, l1_count));
 
 
+        // SoftMax output layer - ouptut layer should have values between 0 and 1
         System.out.println(buildLayerDescriptor("Output", _numOutputs, "SoftMax", false, -1));
         _network.addLayer(new BasicLayer(new ActivationSoftMax(), false, _numOutputs));
 
@@ -125,11 +125,6 @@ public class WiliNeuralNetwork {
         foldTrain = new ResilientPropagation(_network, foldedDataSet);
         System.out.println("\tCreating Cross Validation Trainer...");
         _trainer = new CrossValidationKFold(foldTrain, 5);
-
-//        foldTrain = new ResilientPropagation(_network, foldedDataSet, 0.1, 20);
-//        Use backpropagation training with alpha=0.1 and momentum=0.2
-//        _trainer = new Backpropagation(_network, _trainingSet, _learnRate, _momentum);
-//        _trainer.addStrategy(new SmartLearningRate());
 
         System.out.println("Network Built.");
     }
@@ -234,7 +229,7 @@ public class WiliNeuralNetwork {
 
     private MLDataSet loadDataSet(DatasetType datasetType) {
 
-        String filename = DatasetBuilder.buildFilename(_numInputs, datasetType, _minNGram, _maxNGram);
+        String filename = VectorFileCreator.buildFilename(_numInputs, datasetType, _minNGram, _maxNGram);
 
         DataSetCODEC dsc = new CSVDataCODEC(new File(filename), CSVFormat.ENGLISH, _inputHasHeaders, _numInputs, _numOutputs, false);
         MemoryDataLoader mdl = new MemoryDataLoader(dsc);
