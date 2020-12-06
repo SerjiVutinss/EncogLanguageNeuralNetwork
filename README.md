@@ -14,4 +14,4 @@ Hardware: Ryzen 3700X CPU (16-threads @3.6Ghz)
 * Results Correct: 11560/11738
 * Accuracy: 98.483558%
 
-### Don't forget to take a look at the [PDF version of the Readme](https://github.com/SerjiVutinss/EncogLanguageNeuralNetwork/blob/master/README.pdf) for more detail on design choices and performance of the Neural Network.
+#### Don't forget to take a look at the [PDF version of the Readme](https://github.com/SerjiVutinss/EncogLanguageNeuralNetwork/blob/master/README.pdf) for more detail on design choices and performance of the Neural Network.
